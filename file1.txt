@@ -1,0 +1,3 @@
+This is the first sample file by Winston Shih.
+End of file 1.
+
