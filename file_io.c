@@ -30,6 +30,7 @@ int main() {
     readFile(file1);
     readFile(file2);
     readFile(file3);
+    readFile(file4);
 
     return 0;
 }
