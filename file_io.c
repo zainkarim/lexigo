@@ -20,6 +20,7 @@ void readFile(const char *filename) {
 }
 
 int main() {
+<<<<<<< HEAD
     // Define file names
     const char *file1 = "file1.txt";
     const char *file2 = "file2.txt";
@@ -33,5 +34,12 @@ int main() {
     readFile(file4);
 
     return 0;
+=======
+const char *filenames[] = {"file1.txt", "file2.txt", "file3.txt", "file4.txt" };
+for (int i = 0; i < 4; i++){
+	readFile(filenames[i]);
+}
+return 0;
+>>>>>>> 111de81 (Saving local changes before pulling)
 }
 
