@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
+import { SVGProps } from 'react';
 import styled from 'styled-components';
-import { FaStar, FaRandom, FaRedo } from 'react-icons/fa';
+
+import { FaStar as RawFaStar, FaRandom as RawFaRandom, FaRedo as RawFaRedo } from 'react-icons/fa';
+const FaStar = RawFaStar as unknown as React.FC<SVGProps<SVGSVGElement>>;
+const FaRandom = RawFaRandom as unknown as React.FC;
+const FaRedo = RawFaRedo as unknown as React.FC;
+
 import { useAuth } from '../hooks/useAuth';
 
 // Types

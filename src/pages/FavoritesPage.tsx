@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FaStar, FaVolumeUp, FaSearch, FaSort, FaSortAlphaDown, FaSortAlphaUp } from 'react-icons/fa';
+
+import { FaStar as RawFaStar, FaVolumeUp as RawFaVolumeUp, FaSearch as RawFaSearch, FaSort as RawFaSort, FaSortAlphaDown as RawFaSortAlphaDown, FaSortAlphaUp as RawFaSortAlphaUp } from 'react-icons/fa';
+const FaStar = RawFaStar as unknown as React.FC;
+const FaVolumeUp = RawFaVolumeUp as unknown as React.FC;
+const FaSearch = RawFaSearch as unknown as React.FC;
+const FaSort = RawFaSort as unknown as React.FC;
+const FaSortAlphaDown = RawFaSortAlphaDown as unknown as React.FC;
+const FaSortAlphaUp = RawFaSortAlphaUp as unknown as React.FC;
+
 import { useAuth } from '../hooks/useAuth';
 
 // Types

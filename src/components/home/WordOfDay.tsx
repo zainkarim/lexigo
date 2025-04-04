@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FaStar, FaVolumeUp } from 'react-icons/fa';
+
+import { FaStar as RawFaStar, FaVolumeUp as RawFaVolumeUp } from 'react-icons/fa';
+const FaStar = RawFaStar as unknown as React.FC;
+const FaVolumeUp = RawFaVolumeUp as unknown as React.FC;
+
 import { useAuth } from '../../hooks/useAuth';
 
 // Types for word data

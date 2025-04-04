@@ -12,6 +12,7 @@ import QuizPage from './pages/QuizPage';
 import FavoritesPage from './pages/FavoritesPage';
 import ProfilePage from './pages/ProfilePage';
 import NotFoundPage from './pages/NotFoundPage';
+import Test from './pages/Test';
 
 // Protected route component to restrict access to authenticated users
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -35,7 +36,8 @@ const App: React.FC = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/dictionary" element={<DictionaryPage />} />
-          
+          <Route path="/test" element={<Test />} />
+
           {/* Protected routes */}
           <Route path="/flashcards" element={
             <ProtectedRoute>

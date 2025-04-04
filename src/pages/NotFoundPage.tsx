@@ -1,7 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FaHome, FaSearch, FaBook } from 'react-icons/fa';
+
+import {
+  FaHome as RawFaHome,
+  FaSearch as RawFaSearch,
+  FaBook as RawFaBook
+} from 'react-icons/fa';
+
+const FaHome = RawFaHome as unknown as React.FC;
+const FaSearch = RawFaSearch as unknown as React.FC;
+const FaBook = RawFaBook as unknown as React.FC;
+
 
 // Styled components
 const NotFoundContainer = styled.div`

@@ -1,7 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { FaUser, FaEnvelope, FaLock, FaSignOutAlt, FaChartBar, FaStar, FaBook, FaCheck, FaEdit } from 'react-icons/fa';
+
+import {
+  FaUser as RawFaUser,
+  FaEnvelope as RawFaEnvelope,
+  FaLock as RawFaLock,
+  FaSignOutAlt as RawFaSignOutAlt,
+  FaChartBar as RawFaChartBar,
+  FaStar as RawFaStar,
+  FaBook as RawFaBook,
+  FaCheck as RawFaCheck,
+  FaEdit as RawFaEdit
+} from 'react-icons/fa';
+
+const FaUser = RawFaUser as unknown as React.FC;
+const FaEnvelope = RawFaEnvelope as unknown as React.FC;
+const FaLock = RawFaLock as unknown as React.FC;
+const FaSignOutAlt = RawFaSignOutAlt as unknown as React.FC;
+const FaChartBar = RawFaChartBar as unknown as React.FC;
+const FaStar = RawFaStar as unknown as React.FC;
+const FaBook = RawFaBook as unknown as React.FC;
+const FaCheck = RawFaCheck as unknown as React.FC;
+const FaEdit = RawFaEdit as unknown as React.FC;
+
 import { useAuth } from '../hooks/useAuth';
 
 // Styled components

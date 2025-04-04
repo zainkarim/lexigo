@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { SVGProps } from 'react';
 import { useAuth } from '../hooks/useAuth';
-import { FaTrophy, FaClock, FaRedo } from 'react-icons/fa';
+
+import {
+  FaTrophy as RawFaTrophy,
+  FaClock as RawFaClock,
+  FaRedo as RawFaRedo
+} from 'react-icons/fa';
+
+const FaTrophy = RawFaTrophy as unknown as React.FC<SVGProps<SVGSVGElement>>;
+const FaClock = RawFaClock as unknown as React.FC;
+const FaRedo = RawFaRedo as unknown as React.FC;
 
 // Types
 interface QuizQuestion {

@@ -3,7 +3,19 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from '../hooks/useAuth';
 import WordOfDay from '../components/home/WordOfDay';
-import { FaBook, FaStar, FaLayerGroup, FaQuestionCircle } from 'react-icons/fa';
+
+import {
+  FaBook as RawFaBook,
+  FaStar as RawFaStar,
+  FaLayerGroup as RawFaLayerGroup,
+  FaQuestionCircle as RawFaQuestionCircle
+} from 'react-icons/fa';
+
+const FaBook = RawFaBook as unknown as React.FC;
+const FaStar = RawFaStar as unknown as React.FC;
+const FaLayerGroup = RawFaLayerGroup as unknown as React.FC;
+const FaQuestionCircle = RawFaQuestionCircle as unknown as React.FC;
+
 
 const HomeContainer = styled.div`
   padding: 2rem 0;

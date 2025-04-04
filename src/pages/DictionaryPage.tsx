@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FaStar, FaVolumeUp, FaSearch } from 'react-icons/fa';
+import { FaSearch as RawFaSearch, FaVolumeUp as RawFaVolumeUp, FaStar as RawFaStar } from 'react-icons/fa';
+
+const FaSearch = RawFaSearch as unknown as React.FC;
+const FaVolumeUp = RawFaVolumeUp as unknown as React.FC;
+const FaStar = RawFaStar as unknown as React.FC;
+
 import { useAuth } from '../hooks/useAuth';
 
 // Types for dictionary data
