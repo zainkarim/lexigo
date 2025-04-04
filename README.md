@@ -8,7 +8,6 @@ rm -rf node_modules package-lock.json
 
 npm install --legacy-peer-deps
 
-# If you still encounter the 'ajv' error after installation, install these specific packages:
 if you got the ajv error like me, run this: npm install ajv@8.12.0 ajv-keywords@5.1.0 --legacy-peer-deps
 
 
