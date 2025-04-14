@@ -121,7 +121,7 @@ const OptionButton = styled.button<{
 
 const NextButton = styled.button`
   padding: 0.75rem 1.5rem;
-  background-color: #0070f3;
+  background-color: #212529;
   color: white;
   border: none;
   border-radius: 0.25rem;
@@ -131,7 +131,7 @@ const NextButton = styled.button`
   display: block;
   
   &:hover {
-    background-color: #0051a8;
+    background-color: #495057;
   }
   
   &:disabled {
@@ -157,8 +157,8 @@ const QuizTypeCard = styled.button`
   transition: all 0.2s;
   
   &:hover {
-    border-color: #0070f3;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-color: #212529;
+    box-shadow: 0 0 0 0.2rem rgba(73, 80, 87, 0.24);
   }
 `;
 
@@ -192,7 +192,7 @@ const ResultTitle = styled.h2`
 const ResultScore = styled.div`
   font-size: 3rem;
   font-weight: 700;
-  color: #0070f3;
+  color: #212529;
   margin-bottom: 1.5rem;
 `;
 
@@ -222,7 +222,7 @@ const StatLabel = styled.div`
 
 const ActionButton = styled.button`
   padding: 0.75rem 1.5rem;
-  background-color: #0070f3;
+  background-color: #212529;
   color: white;
   border: none;
   border-radius: 0.25rem;
@@ -233,7 +233,7 @@ const ActionButton = styled.button`
   gap: 0.5rem;
   
   &:hover {
-    background-color: #0051a8;
+    background-color: #495057;
   }
 `;
 

@@ -158,7 +158,7 @@ const NavigationButtons = styled.div`
 `;
 
 const NavButton = styled.button`
-  background-color: #0070f3;
+  background-color: #212529;
   color: white;
   border: none;
   border-radius: 0.25rem;
@@ -168,7 +168,7 @@ const NavButton = styled.button`
   transition: background-color 0.2s;
   
   &:hover {
-    background-color: #0051a8;
+    background-color: #495057;
   }
   
   &:disabled {

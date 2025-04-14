@@ -23,6 +23,7 @@ interface WordOfDayData {
 }
 
 // Styled components
+<<<<<<< HEAD
 const WordCard = styled.div`background: white; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);`;
 const CardHeader = styled.div`display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;`;
 const CardTitle = styled.h3`font-size: 1.25rem; font-weight: 600; color: #212529;`;
@@ -33,6 +34,71 @@ const Word = styled.h2`font-size: 2rem; font-weight: 700; margin-right: 0.75rem;
 const Pronunciation = styled.span`color: #6c757d; font-style: italic; margin-right: 0.5rem;`;
 const AudioButton = styled.button`background: none; border: none; color: #0070f3; cursor: pointer; font-size: 1.25rem;`;
 const Actions = styled.div`display: flex; align-items: center;`;
+=======
+const WordCard = styled.div`
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const CardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+`;
+
+const CardTitle = styled.h3`
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #212529;
+`;
+
+const CardDate = styled.span`
+  color: #6c757d;
+  font-size: 0.875rem;
+`;
+
+const WordHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+`;
+
+const WordTitle = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Word = styled.h2`
+  font-size: 2rem;
+  font-weight: 700;
+  margin-right: 0.75rem;
+`;
+
+const Pronunciation = styled.span`
+  color: #6c757d;
+  font-style: italic;
+  margin-right: 0.5rem;
+`;
+
+const AudioButton = styled.button`
+  background: none;
+  border: none;
+  color: #212529;
+  cursor: pointer;
+  font-size: 1.25rem;
+`;
+
+const Actions = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+>>>>>>> 6c0679521a9f5707328cc29763a62cc18f60fa06
 const FavoriteButton = styled.button<{ $isFavorite: boolean }>`
   background: none;
   border: none;
