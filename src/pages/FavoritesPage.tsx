@@ -49,8 +49,8 @@ const SearchInput = styled.input`
   
   &:focus {
     outline: none;
-    border-color: #0070f3;
-    box-shadow: 0 0 0 0.2rem rgba(0, 112, 243, 0.25);
+    border-color: #212529;
+    box-shadow: 0 0 0 0.2rem rgba(73, 80, 87, 0.48);
   }
 `;
 
@@ -89,7 +89,7 @@ const SortButton = styled.button`
   
   &.active {
     background-color: #e3f2fd;
-    color: #0070f3;
+    color: #212529;
   }
 `;
 
@@ -207,14 +207,14 @@ const EmptyStateText = styled.p`
 const ExploreButton = styled(Link)`
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background-color: #0070f3;
+  background-color: #212529;
   color: white;
   text-decoration: none;
   border-radius: 0.25rem;
   font-weight: 500;
   
   &:hover {
-    background-color: #0051a8;
+    background-color: #495057;
   }
 `;
 

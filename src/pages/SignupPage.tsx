@@ -45,15 +45,15 @@ const Input = styled.input`
   
   &:focus {
     outline: none;
-    border-color: #0070f3;
-    box-shadow: 0 0 0 0.2rem rgba(0, 112, 243, 0.25);
+    border-color: #212529;
+    box-shadow: 0 0 0 0.2rem rgba(73, 80, 87, 0.48);
   }
 `;
 
 const SubmitButton = styled.button`
   padding: 0.75rem 1.5rem;
   border-radius: 0.25rem;
-  background-color: #0070f3;
+  background-color: #212529;
   color: white;
   border: none;
   font-family: inherit;
@@ -63,7 +63,7 @@ const SubmitButton = styled.button`
   margin-top: 1rem;
   
   &:hover {
-    background-color: #0051a8;
+    background-color: #495057;
   }
   
   &:disabled {
@@ -85,7 +85,7 @@ const LoginLink = styled.div`
   text-align: center;
   
   a {
-    color: #0070f3;
+    color: #495057;
     text-decoration: none;
     
     &:hover {

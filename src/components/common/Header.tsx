@@ -31,14 +31,14 @@ const ProfileIcon = styled.div<{ isOpen: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #0070f3;
+  background-color: #212529;
   color: white;
   font-weight: 500;
   cursor: pointer;
   position: relative;
   
   &:hover {
-    background-color: #0051a8;
+    background-color: #495057;
   }
 `;
 
@@ -84,13 +84,13 @@ const LogoutButton = styled.button`
 const LoginButton = styled(Link)`
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
-  background-color: #0070f3;
+  background-color: #212529;
   color: white;
   text-decoration: none;
   font-weight: 500;
   
   &:hover {
-    background-color: #0051a8;
+    background-color: #495057;
   }
 `;
 

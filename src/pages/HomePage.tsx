@@ -46,27 +46,27 @@ const LoginPrompt = styled.div`
 const LoginButton = styled(Link)`
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
-  background-color: #0070f3;
+  background-color: #212529;
   color: white;
   text-decoration: none;
   font-weight: 500;
   
   &:hover {
-    background-color: #0051a8;
+    background-color: #495057;
   }
 `;
 
 const SignupButton = styled(Link)`
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
-  border: 1px solid #0070f3;
+  border: 1px solid #212529;
   background-color: transparent;
-  color: #0070f3;
+  color: #212529;
   text-decoration: none;
   font-weight: 500;
   
   &:hover {
-    background-color: #e6f0ff;
+    background-color:rgba(149, 150, 150, 0.54);
   }
 `;
 
@@ -103,7 +103,7 @@ const FeatureLockIcon = styled.div`
 const FeatureIcon = styled.div`
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #0070f3;
+  color: #212529;
 `;
 
 const FeatureTitle = styled.h3`

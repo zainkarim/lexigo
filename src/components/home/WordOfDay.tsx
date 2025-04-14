@@ -75,7 +75,7 @@ const Pronunciation = styled.span`
 const AudioButton = styled.button`
   background: none;
   border: none;
-  color: #0070f3;
+  color: #212529;
   cursor: pointer;
   font-size: 1.25rem;
 `;
