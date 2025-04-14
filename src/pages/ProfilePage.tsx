@@ -398,9 +398,9 @@ const ProfilePage: React.FC = () => {
   useEffect(() => {
     if (user) {
       setFormData({
-        firstName: 'Lexigo',
-        lastName: 'Project :D',
-        email: user.email || 'hello@lexigo.com',
+        firstName: user.firstName || '',
+        lastName: user.lastName || '',
+        email: user.email || '',
         currentPassword: '',
         newPassword: '',
         confirmPassword: ''

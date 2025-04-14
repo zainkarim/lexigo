@@ -105,8 +105,15 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
     
     // Simple validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!username || !password) {
       setFormError('Please fill in all fields');
+      return;
+    }
+
+    if (!emailRegex.test(username)) {
+      setFormError('Please enter a valid email address');
       return;
     }
     
@@ -142,7 +149,7 @@ const LoginPage: React.FC = () => {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter your username"
+            placeholder="Enter your email address"
             required
           />
         </FormGroup>
