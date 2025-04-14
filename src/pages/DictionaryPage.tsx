@@ -19,6 +19,7 @@ interface DictionaryWordData {
   pronunciation: string;
   partOfSpeech: string;
   definitions: WordDefinition[];
+  audioUrl?: string;
 }
 
 // Styled components
@@ -227,18 +228,51 @@ const DictionaryPage: React.FC = () => {
   const [searchResult, setSearchResult] = useState<DictionaryWordData | null>(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>(mockRecentSearches);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
-  const handleSearch = (term: string) => {
+  const handleSearch = async (term: string) => {
     if (!term.trim()) return;
-    
-    setSearchResult(mockWordData);
-    
-    // Add to recent searches
-    if (!recentSearches.includes(term)) {
-      const updatedSearches = [term, ...recentSearches.slice(0, 4)];
-      setRecentSearches(updatedSearches);
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${term}`);
+      if (!response.ok) throw new Error('Word not found');
+  
+      const data = await response.json();
+      const entry = data[0];
+      const meanings = entry.meanings[0]; // Just grabbing the first meaning for simplicity
+      const phonetic = entry.phonetic || entry.phonetics?.[0]?.text || '';
+      const audioUrl = entry.phonetics?.find((p: any) => p.audio)?.audio;
+  
+      const wordData: DictionaryWordData = {
+        word: entry.word,
+        pronunciation: phonetic,
+        partOfSpeech: meanings.partOfSpeech,
+        definitions: meanings.definitions.map((d: any) => ({
+          definition: d.definition,
+          example: d.example,
+        })),
+        audioUrl,
+      };
+  
+      setSearchResult(wordData);
+  
+      // Update recent searches
+      if (!recentSearches.includes(term)) {
+        const updatedSearches = [term, ...recentSearches.slice(0, 4)];
+        setRecentSearches(updatedSearches);
+      }
+    } catch (error: any) {
+      console.error(error);
+      setSearchResult(null);
+      setError(error.message || 'Something went wrong');
+    } finally {
+      setLoading(false);
     }
-  };
+  };  
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -257,8 +291,11 @@ const DictionaryPage: React.FC = () => {
   };
   
   const playPronunciation = () => {
-    console.log('Playing pronunciation for:', searchResult?.word);
-  };
+    if (searchResult?.audioUrl) {
+      const audio = new Audio(searchResult.audioUrl);
+      audio.play();
+    }
+  };  
   
   return (
     <DictionaryContainer>
@@ -295,48 +332,59 @@ const DictionaryPage: React.FC = () => {
       </SearchContainer>
       
       <ResultContainer>
-        {searchResult ? (
-          <ResultCard>
-            <WordHeader>
-              <WordTitle>
-                <Word>{searchResult.word}</Word>
-                <Pronunciation>{searchResult.pronunciation}</Pronunciation>
-                <AudioButton onClick={playPronunciation} title="Listen to pronunciation">
-                  <FaVolumeUp />
-                </AudioButton>
-              </WordTitle>
-              
-              <Actions>
-                <FavoriteButton 
-                  onClick={toggleFavorite} 
-                  $isFavorite={isFavorite}
-                  title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-                  disabled={!user}
-                >
-                  <FaStar />
-                </FavoriteButton>
-              </Actions>
-            </WordHeader>
+      {loading ? (
+        <EmptyState>
+          <EmptyStateTitle>Searching…</EmptyStateTitle>
+          <EmptyStateText>Hang tight while we look that up for you.</EmptyStateText>
+        </EmptyState>
+      ) : error ? (
+        <EmptyState>
+          <EmptyStateTitle>Oops!</EmptyStateTitle>
+          <EmptyStateText>{error}</EmptyStateText>
+        </EmptyState>
+      ) : searchResult ? (
+        <ResultCard>
+          <WordHeader>
+            <WordTitle>
+              <Word>{searchResult.word}</Word>
+              <Pronunciation>{searchResult.pronunciation}</Pronunciation>
+              <AudioButton onClick={playPronunciation} title="Listen to pronunciation">
+                <FaVolumeUp />
+              </AudioButton>
+            </WordTitle>
             
-            <PartOfSpeech>{searchResult.partOfSpeech}</PartOfSpeech>
-            
-            <DefinitionsList>
-              {searchResult.definitions.map((def, index) => (
-                <DefinitionItem key={index}>
-                  <Definition>{index + 1}. {def.definition}</Definition>
-                  {def.example && <Example>{def.example}</Example>}
-                </DefinitionItem>
-              ))}
-            </DefinitionsList>
-          </ResultCard>
-        ) : (
-          <EmptyState>
-            <EmptyStateTitle>Looking for a word?</EmptyStateTitle>
-            <EmptyStateText>
-              Type a word in the search box above to see its definition.
-            </EmptyStateText>
-          </EmptyState>
-        )}
+            <Actions>
+              <FavoriteButton 
+                onClick={toggleFavorite} 
+                $isFavorite={isFavorite}
+                title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+                disabled={!user}
+              >
+                <FaStar />
+              </FavoriteButton>
+            </Actions>
+          </WordHeader>
+
+          <PartOfSpeech>{searchResult.partOfSpeech}</PartOfSpeech>
+
+          <DefinitionsList>
+            {searchResult.definitions.map((def, index) => (
+              <DefinitionItem key={index}>
+                <Definition>{index + 1}. {def.definition}</Definition>
+                {def.example && <Example>{def.example}</Example>}
+              </DefinitionItem>
+            ))}
+          </DefinitionsList>
+        </ResultCard>
+      ) : (
+        <EmptyState>
+          <EmptyStateTitle>Looking for a word?</EmptyStateTitle>
+          <EmptyStateText>
+            Type a word in the search box above to see its definition.
+          </EmptyStateText>
+        </EmptyState>
+      )}
+
       </ResultContainer>
     </DictionaryContainer>
   );
