@@ -95,7 +95,7 @@ const SignupLink = styled.div`
 `;
 
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [formError, setFormError] = useState('');
   const { login, error, isLoading } = useAuth();
@@ -107,12 +107,12 @@ const LoginPage: React.FC = () => {
     // Simple validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!username || !password) {
+    if (!email || !password) {
       setFormError('Please fill in all fields');
       return;
     }
 
-    if (!emailRegex.test(username)) {
+    if (!emailRegex.test(email)) {
       setFormError('Please enter a valid email address');
       return;
     }
@@ -122,7 +122,7 @@ const LoginPage: React.FC = () => {
     
     try {
       // Call login from auth context
-      await login(username, password);
+      await login(email, password);
       navigate('/');
     } catch (err) {
       // Error handling is done within the AuthContext
@@ -143,12 +143,12 @@ const LoginPage: React.FC = () => {
       
       <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <Label htmlFor="username">Username</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
             type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email address"
             required
           />
