@@ -2,7 +2,7 @@
  * Black Box testing class for Word class
  * Anoop Kondepudi
  */
-const Word = require('./Word');
+const Word = require('../../Word');
 
 // Clear the word list before tests to ensure clean state
 beforeEach(() => {
