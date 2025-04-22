@@ -7,21 +7,8 @@
 /*
 Class User
 •    constructor
-•    changeUserName(username)
 •    changePassword(password)
 •    changeEmail(email)
-•    changePhoneNumber(phoneNumber)
-
-•    addFavorite(favorite)
-•    deleteFavorite(favorite)
-
-•    checkUserID_Length(userID) -> Checks if the userID length is between 5 and 20 characters.
-•    checkUserID_ValidCharacters(userID) -> Checks if the userID contains any disallowed special characters.
-
-•    checkUsername_Length(name) -> Checks if the username length is between 3 and 20 characters.
-•    checkUsernameValidCharacters(name)
-        -> Checks if the username contains any disallowed special characters.
-        -> Allowed special characters: '', '-', '.'
 
 •    checkPassword_Length(pwd) -> Checks if the password length is greater than or equal to 8 characters.
 •    checkPassword_ValidCharacters(pwd) -> Checks if the password contains at least one uppercase letter and one special character.
@@ -34,20 +21,12 @@ Class User
 •    getEmailPrefix(email) -> return the substring of email before the '@' (prefix)
 •    getEmailDomain(email) -> returns the substring of email after the '@' (domain)
 
-•    checkPhoneNumber_Length(phoneNumber) -> Checks if the phone number length is 13 digits (including dashes for format: XXX-XXX-XXXX).
-•    checkPhoneNumber_ValidCharactersAndFormat(phoneNumber) -> Checks if the phone number contains only digits and dashes.
-
 */
 
-class User {
+export class User {
 
-    static MIN_LENGTH_USERID = 5;
-    static MAX_LENGTH_USERID = 20;
-    static MIN_LENGTH_USERNAME = 3;
-    static MAX_LENGTH_USERNAME = 20;
     static MIN_LENGTH_PWD = 8;
 
-    static LENGTH_PHONE_NUMBER = 13;
     static MIN_LENGTH_EMAIL = 5; // smallest form: a@b.c --> 5 characters
     static MAX_LENGTH_EMAIL = 320; // {64}@{255} = 64 + 1 + 255 = 320
     static MIN_LENGTH_EMAILPREFIX = 1; 
@@ -55,18 +34,11 @@ class User {
     static MIN_LENGTH_EMAILDOMAIN = 3;
     static MAX_LENGTH_EMAILDOMAIN = 255; 
 
-    constructor(userID,username, password, email, phoneNumber) {
-        this.userID = userID;
-        this.username = username;
-        this.password = password;
+    constructor(email, password) {
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.password = password;
         this.isLoggedIn = false;
         this.favorites = [];
-    }
-
-    changeUserName(username) {
-        this.username = username;
     }
 
     changePassword(password){
@@ -75,10 +47,6 @@ class User {
 
     changeEmail(email){
         this.email = email;
-    }
-
-    changePhoneNumber(phoneNumber){
-        this.phoneNumber = phoneNumber;
     }
 
     addFavorite(favorite){
@@ -93,51 +61,51 @@ class User {
         }
     }
 
-    checkUserID_Length(userID){
-        //Check if the userID length is greater than 5 and less than 20
+    // checkUserID_Length(userID){
+    //     //Check if the userID length is greater than 5 and less than 20
 
-        if(userID.length < User.MIN_LENGTH_USERID || userID.length >User.MAX_LENGTH_USERID){
-            return false;
-        }
-        return true;
-    }
+    //     if(userID.length < User.MIN_LENGTH_USERID || userID.length >User.MAX_LENGTH_USERID){
+    //         return false;
+    //     }
+    //     return true;
+    // }
 
-    checkUserID_ValidCharacters(userID){
-        // Check if the userID does not contain any disallowed characters and space.
+    // checkUserID_ValidCharacters(userID){
+    //     // Check if the userID does not contain any disallowed characters and space.
 
-        const specialChar = ['_', '-', '.', '@', '!', '#', '$', '%', '^', '&', '*', '(', ')', '+', '=', '{', '}', '[', ']', '|',':', ';', '"', "'", '<', '>', '?', ',', '/', '~', '`'];
+    //     const specialChar = ['_', '-', '.', '@', '!', '#', '$', '%', '^', '&', '*', '(', ')', '+', '=', '{', '}', '[', ']', '|',':', ';', '"', "'", '<', '>', '?', ',', '/', '~', '`'];
 
-        for(let i = 0; i <userID.length; i++){
-            if(specialChar.includes(userID[i])){
-                return false;
-            }
-        }
+    //     for(let i = 0; i <userID.length; i++){
+    //         if(specialChar.includes(userID[i])){
+    //             return false;
+    //         }
+    //     }
 
-        return true;
-    }
+    //     return true;
+    // }
 
-    checkUsername_Length(name){
-        //Check if the userID length is greater than 3 and less than 20
+    // checkUsername_Length(name){
+    //     //Check if the userID length is greater than 3 and less than 20
 
-        if(name.length<User.MIN_LENGTH_USERNAME || name.length > User.MAX_LENGTH_USERNAME){
-            return false;
-        }
-        return true;
-    }
+    //     if(name.length<User.MIN_LENGTH_USERNAME || name.length > User.MAX_LENGTH_USERNAME){
+    //         return false;
+    //     }
+    //     return true;
+    // }
 
-    checkUsername_ValidCharacters(name){
-        // Check if the username does not contain any disallowed characters and space.
-        // Allowed special characters: '_', '-', '.'
+    // checkUsername_ValidCharacters(name){
+    //     // Check if the username does not contain any disallowed characters and space.
+    //     // Allowed special characters: '_', '-', '.'
 
-        const specialChar = ['@', '!', '#', '$', '%', '^', '&', '*', '(', ')', '+', '=', '{', '}', '[', ']', '|', ':', ';', '"', "'", '<', '>', '?', ',', '/', '~', '`'];
-        for(let i =0; i<name.length; i++){
-            if(specialChar.includes(name[i])){
-                return false;
-            }
-        }
+    //     const specialChar = ['@', '!', '#', '$', '%', '^', '&', '*', '(', ')', '+', '=', '{', '}', '[', ']', '|', ':', ';', '"', "'", '<', '>', '?', ',', '/', '~', '`'];
+    //     for(let i =0; i<name.length; i++){
+    //         if(specialChar.includes(name[i])){
+    //             return false;
+    //         }
+    //     }
 
-        return true;
-    }
+    //     return true;
+    // }
 
     checkPassword_Length(pwd){
         // Check if the password length is greater than 8.
@@ -202,7 +170,7 @@ class User {
 
         // for domain only allow '-', and '.' (no @ b/c there should only be one)
         const domainChar = [' ', '@', '_', '!', '#', '$', '%', '^', '&', '*', '(', ')', '+', '=', '{', '}', '[', ']', '|',':', ';', '"', "'", '<', '>', '?', ',', '/', '~', '`'];
-        for (let i = atLocation; i < email.length; i++) {
+        for (let i = atLocation + 1; i < email.length; i++) {
             if (domainChar.includes(email[i])) {
                 return false;
             }
@@ -211,20 +179,21 @@ class User {
         return true;
     }
 
+
     checkEmail_Format(email) {
         // Check if email is in xxx@xxx.xxx format 
         const atLocation = this.getAtLocation(email);
         if (atLocation < 0) {
             return false;
-        }
-        else {
+        } else {
             const prefix = this.getPrefix(email);
-            if(prefix <= User.MIN_LENGTH_EMAILPREFIX || email.length >= User.MAX_LENGTH_EMAILPREFIX) {
+            const domain = this.getDomain(email);
+
+            if (prefix.length < User.MIN_LENGTH_EMAILPREFIX || prefix.length > User.MAX_LENGTH_EMAILPREFIX) {
                 return false;
             }
 
-            const domain = this.getDomain(email);
-            if(domain <= User.MIN_LENGTH_EMAILDOMAIN || email.length >= User.MAX_LENGTH_EMAILDOMAIN) {
+            if (domain.length < User.MIN_LENGTH_EMAILDOMAIN || domain.length > User.MAX_LENGTH_EMAILDOMAIN) {
                 return false;
             }
 
@@ -232,9 +201,9 @@ class User {
             for (let i = 0; i < domain.length; i++) {
                 if (domain[i] === '.') {
                     dotLocation = i;
-                }
-                if ((dotLocation === domain.length-1) || (dotLocation === 0)) {
-                    return false;
+                    if (dotLocation === 0 || dotLocation === domain.length - 1) {
+                        return false;
+                    }
                 }
             }
 
@@ -267,34 +236,34 @@ class User {
         return email.substring(atLocation + 1);
     }
 
-    checkPhoneNumber_Length(phoneNumber) {
-        // Check if the phoneNumber length is equal to 13 characters
+    // checkPhoneNumber_Length(phoneNumber) {
+    //     // Check if the phoneNumber length is equal to 13 characters
 
-        if (phoneNumber.length !== User.LENGTH_PHONE_NUMBER){
-            return false;
-        }
-        return true;
-    }
+    //     if (phoneNumber.length !== User.LENGTH_PHONE_NUMBER){
+    //         return false;
+    //     }
+    //     return true;
+    // }
 
-    checkPhoneNumber_ValidCharactersAndFormat(phoneNumber) {
-        // check if the phoneNumber is comprised of only digits and dashes
+    // checkPhoneNumber_ValidCharactersAndFormat(phoneNumber) {
+    //     // check if the phoneNumber is comprised of only digits and dashes
 
-        const digitsChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'];
-        const dash = '-';
+    //     const digitsChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'];
+    //     const dash = '-';
 
-        for (let i = 0; i < phoneNumber.length; i++) {
-            if (i === 3 || i === 7) {
-                if (phoneNumber[i] !== dash) {
-                    return false;
-                }
-            } 
-            else {
-                if (!digitsChars.includes(phoneNumber[i])) {
-                    return false;
-                }
-            }
-        }
+    //     for (let i = 0; i < phoneNumber.length; i++) {
+    //         if (i === 3 || i === 7) {
+    //             if (phoneNumber[i] !== dash) {
+    //                 return false;
+    //             }
+    //         } 
+    //         else {
+    //             if (!digitsChars.includes(phoneNumber[i])) {
+    //                 return false;
+    //             }
+    //         }
+    //     }
 
-        return true;
-    }
+    //     return true;
+    // }
 }

@@ -2,6 +2,7 @@ import React, { useState, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import styled from 'styled-components';
+import { User } from '../User';
 
 const LoginContainer = styled.div`
   max-width: 400px;
@@ -78,6 +79,7 @@ const ErrorMessage = styled.div`
   padding: 0.75rem;
   border-radius: 0.25rem;
   margin-bottom: 1rem;
+  margin-top: 1rem;
 `;
 
 const SignupLink = styled.div`
@@ -97,6 +99,7 @@ const SignupLink = styled.div`
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const user = new User(email, password);
   const [formError, setFormError] = useState('');
   const { login, error, isLoading } = useAuth();
   const navigate = useNavigate();
@@ -105,18 +108,36 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
     
     // Simple validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
     if (!email || !password) {
       setFormError('Please fill in all fields');
       return;
     }
 
-    if (!emailRegex.test(email)) {
+    if (!(user.checkEmail_Length(email))) {
       setFormError('Please enter a valid email address');
       return;
     }
-    
+
+    if (!(user.checkEmail_ValidCharacters(email))) {
+      setFormError('Please enter a valid email address');
+      return;
+    }
+
+    if (!(user.checkEmail_Format(email))) {
+      setFormError('Please enter a valid email address');
+      return;
+    }
+
+    if (!(user.checkPassword_Length(password))) {
+      setFormError('Please enter a valid password');
+      return;
+    }
+
+    if (!(user.checkPassword_ValidCharacters(password))) {
+      setFormError('Please enter a valid password');
+      return;
+    }
+
     // Reset form error
     setFormError('');
     
