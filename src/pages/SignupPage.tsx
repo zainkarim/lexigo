@@ -45,15 +45,15 @@ const Input = styled.input`
   
   &:focus {
     outline: none;
-    border-color: #0070f3;
-    box-shadow: 0 0 0 0.2rem rgba(0, 112, 243, 0.25);
+    border-color: #212529;
+    box-shadow: 0 0 0 0.2rem rgba(73, 80, 87, 0.48);
   }
 `;
 
 const SubmitButton = styled.button`
   padding: 0.75rem 1.5rem;
   border-radius: 0.25rem;
-  background-color: #0070f3;
+  background-color: #212529;
   color: white;
   border: none;
   font-family: inherit;
@@ -63,7 +63,7 @@ const SubmitButton = styled.button`
   margin-top: 1rem;
   
   &:hover {
-    background-color: #0051a8;
+    background-color: #495057;
   }
   
   &:disabled {
@@ -85,7 +85,7 @@ const LoginLink = styled.div`
   text-align: center;
   
   a {
-    color: #0070f3;
+    color: #495057;
     text-decoration: none;
     
     &:hover {
@@ -97,7 +97,7 @@ const LoginLink = styled.div`
 const SignupPage: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [formError, setFormError] = useState('');
@@ -108,8 +108,15 @@ const SignupPage: React.FC = () => {
     e.preventDefault();
     
     // Simple validation
-    if (!firstName || !lastName || !username || !password || !confirmPassword) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
       setFormError('Please fill in all fields');
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      setFormError('Please enter a valid email address');
       return;
     }
     
@@ -129,7 +136,7 @@ const SignupPage: React.FC = () => {
     
     try {
       // Call signup from auth context
-      await signup(username, password, firstName, lastName);
+      await signup(email, password, firstName, lastName);
       navigate('/');
     } catch (err) {
       // Error handling is done within the AuthContext
@@ -174,13 +181,13 @@ const SignupPage: React.FC = () => {
         </FormGroup>
         
         <FormGroup>
-          <Label htmlFor="username">Username</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
             type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Choose a username"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Choose a email"
             required
           />
         </FormGroup>

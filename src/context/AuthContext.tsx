@@ -1,4 +1,7 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { doc, setDoc, getFirestore, getDoc } from 'firebase/firestore';
+import { db, auth } from '../firebaseConfig';
 
 // Define types
 interface User {
@@ -56,34 +59,29 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setIsLoading(false);
   }, []);
 
-  // Login function with hardcoded test credentials
+  // Login function with hardcoded test credentials  
   const login = async (email: string, password: string): Promise<void> => {
     try {
       setIsLoading(true);
       setError(null);
-      
-      // Check if credentials match the test user
-      const foundUser = testUsers.find(user => user.email === email && user.password === password);
-      
-      if (foundUser) {
-        // Create a user object without the password
-        const authenticatedUser: User = {
-          id: foundUser.id,
-          email: foundUser.email,
-          firstName: foundUser.firstName,
-          lastName: foundUser.lastName
-        };
-        
-        // Store in localStorage for persistence
-        localStorage.setItem('user', JSON.stringify(authenticatedUser));
-        setUser(authenticatedUser);
-      } else {
-        // Authentication failed
-        throw new Error('Invalid username or password');
-      }
-    } catch (err) {
-      setError('Invalid username or password');
-      console.error(err);
+
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const { user } = userCredential;
+
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      const profileData = userDoc.exists() ? userDoc.data() : {};
+
+      const authenticatedUser: User = {
+        id: user.uid,
+        email: user.email || '',
+        firstName: profileData.firstName || '',
+        lastName: profileData.lastName || '',
+      };
+
+      setUser(authenticatedUser);
+      localStorage.setItem('user', JSON.stringify(authenticatedUser));
+    } catch (err: any) {
+      setError(err.message || 'Invalid email or password');
     } finally {
       setIsLoading(false);
     }
@@ -93,36 +91,35 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const signup = async (email: string, password: string, firstName: string, lastName: string): Promise<void> => {
     try {
       setIsLoading(true);
-      setError(null);
-      
-      // Check if email already exists in test users
-      if (testUsers.some(user => user.email === email)) {
-        throw new Error('Email already in use');
-      }
-      
-      // Create a new user object
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const { user } = userCredential;
+
+      // Store user info in Firestore
+      await setDoc(doc(db, 'users', user.uid), {
+        firstName,
+        lastName,
+        email,
+      });
+
       const newUser: User = {
-        id: String(testUsers.length + 1),
+        id: user.uid,
         email,
         firstName,
-        lastName
+        lastName,
       };
-      
-      // Store in localStorage for persistence
-      localStorage.setItem('user', JSON.stringify(newUser));
-      setUser(newUser);
-      
-      console.log('New user registered:', { email, firstName, lastName });
+
+      setUser({ id: user.uid, email: user.email!, firstName, lastName });
+      localStorage.setItem('user', JSON.stringify({ id: user.uid, email: user.email, firstName, lastName }));
     } catch (err: any) {
-      setError(err.message || 'Error creating account');
-      console.error(err);
+      setError(err.message || 'Failed to create account');
     } finally {
       setIsLoading(false);
     }
   };
 
   // Logout function
-  const logout = (): void => {
+  const logout = async (): Promise<void> => {
+    await signOut(auth);
     localStorage.removeItem('user');
     setUser(null);
   };

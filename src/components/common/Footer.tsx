@@ -23,7 +23,7 @@ const FooterLinks = styled.div`
 `;
 
 const FooterLink = styled.a`
-  color: #0070f3;
+  color: #495057;
   text-decoration: none;
   
   &:hover {

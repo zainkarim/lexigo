@@ -71,8 +71,8 @@ const ProfileAvatar = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  border: 3px solid #0070f3;
-  color: #0070f3;
+  border: 3px solid #212529;
+  color: #212529;
   font-size: 2.5rem;
 `;
 
@@ -141,7 +141,7 @@ const SectionTitle = styled.h3`
   
   svg {
     margin-right: 0.5rem;
-    color: #0070f3;
+    color: #212529;
   }
 `;
 
@@ -167,7 +167,7 @@ const StatCard = styled.div`
 const StatValue = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
-  color: #0070f3;
+  color: #212529;
   margin-bottom: 0.25rem;
 `;
 
@@ -200,15 +200,15 @@ const Input = styled.input`
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   
   &:focus {
-    border-color: #0070f3;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 112, 243, 0.25);
+    border-color: #212529;
+    box-shadow: 0 0 0 0.2rem rgba(73, 80, 87, 0.48);
   }
 `;
 
 const SubmitButton = styled.button`
   display: inline-block;
-  background-color: #0070f3;
+  background-color: #212529;
   color: white;
   font-weight: 500;
   text-align: center;
@@ -221,7 +221,7 @@ const SubmitButton = styled.button`
   transition: all 0.15s ease-in-out;
   
   &:hover {
-    background-color: #0051a8;
+    background-color: #495057;
   }
   
   &:disabled {
@@ -398,9 +398,9 @@ const ProfilePage: React.FC = () => {
   useEffect(() => {
     if (user) {
       setFormData({
-        firstName: 'Lexigo',
-        lastName: 'Project :D',
-        email: user.email || 'hello@lexigo.com',
+        firstName: user.firstName || '',
+        lastName: user.lastName || '',
+        email: user.email || '',
         currentPassword: '',
         newPassword: '',
         confirmPassword: ''
