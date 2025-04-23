@@ -1,9 +1,7 @@
-/**
- * Anoop and Winston Shih
- * CS 3354 Group 14 Phase 4
- * 4/2/2025
- */
 class Word {
+    static MIN_LENGTH_WORD = 1;
+    static MAX_LENGTH_WORD = 50;
+    
     static wordList = []; // Static list to store all words
     /**
      * Constructor class with 6 parameter arguments
@@ -22,6 +20,24 @@ class Word {
         this.tag = tag;
         this.difficulty = difficulty;
     }
+
+    static checkWord_Length(word){
+        //Check if the userID length is greater than 1 and less than 50
+
+        if (word.length < this.MIN_LENGTH_WORD){
+            return "Word must be at least 1 character";
+        }
+        else if(word.length > this.MAX_LENGTH_WORD){
+            return "Word is too long";
+        }
+        return "Word is valid"
+    }
+
+    static checkSpecialCharacters(word) {
+        // Check if the word contains special characters
+        return /[^a-zA-Z0-9]/.test(word);
+    }
+    
 
     /**
      * Sets word ID to a numeric non-zero value.
