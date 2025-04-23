@@ -20,7 +20,6 @@ Class User
 •    getAtLocation(email) -> returns the location of '@'
 •    getEmailPrefix(email) -> return the substring of email before the '@' (prefix)
 •    getEmailDomain(email) -> returns the substring of email after the '@' (domain)
-
 */
 
 export class User {
@@ -60,52 +59,6 @@ export class User {
             this.favorites.splice(this.favorites.indexOf(favorite), 1);
         }
     }
-
-    // checkUserID_Length(userID){
-    //     //Check if the userID length is greater than 5 and less than 20
-
-    //     if(userID.length < User.MIN_LENGTH_USERID || userID.length >User.MAX_LENGTH_USERID){
-    //         return false;
-    //     }
-    //     return true;
-    // }
-
-    // checkUserID_ValidCharacters(userID){
-    //     // Check if the userID does not contain any disallowed characters and space.
-
-    //     const specialChar = ['_', '-', '.', '@', '!', '#', '$', '%', '^', '&', '*', '(', ')', '+', '=', '{', '}', '[', ']', '|',':', ';', '"', "'", '<', '>', '?', ',', '/', '~', '`'];
-
-    //     for(let i = 0; i <userID.length; i++){
-    //         if(specialChar.includes(userID[i])){
-    //             return false;
-    //         }
-    //     }
-
-    //     return true;
-    // }
-
-    // checkUsername_Length(name){
-    //     //Check if the userID length is greater than 3 and less than 20
-
-    //     if(name.length<User.MIN_LENGTH_USERNAME || name.length > User.MAX_LENGTH_USERNAME){
-    //         return false;
-    //     }
-    //     return true;
-    // }
-
-    // checkUsername_ValidCharacters(name){
-    //     // Check if the username does not contain any disallowed characters and space.
-    //     // Allowed special characters: '_', '-', '.'
-
-    //     const specialChar = ['@', '!', '#', '$', '%', '^', '&', '*', '(', ')', '+', '=', '{', '}', '[', ']', '|', ':', ';', '"', "'", '<', '>', '?', ',', '/', '~', '`'];
-    //     for(let i =0; i<name.length; i++){
-    //         if(specialChar.includes(name[i])){
-    //             return false;
-    //         }
-    //     }
-
-    //     return true;
-    // }
 
     checkPassword_Length(pwd){
         // Check if the password length is greater than 8.

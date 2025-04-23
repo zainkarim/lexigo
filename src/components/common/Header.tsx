@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import styled from 'styled-components';
+import { setFlagsFromString } from 'v8';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -97,12 +98,19 @@ const LoginButton = styled(Link)`
 const Header: React.FC = () => {
   const { user, logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [logoutError, setLogoutError] = useState<string | null>(null);
   const navigate = useNavigate();
   
   const handleLogout = () => {
+    if (!user) {
+      setLogoutError('No active user session.');
+      return;
+    }
+
     logout();
     setMenuOpen(false);
     navigate('/');
+    setLogoutError(null);
   };
   
   const toggleMenu = () => {

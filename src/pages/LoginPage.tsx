@@ -107,7 +107,7 @@ const LoginPage: React.FC = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     
-    // Simple validation
+    // Implementing User.js
     if (!email || !password) {
       setFormError('Please fill in all fields');
       return;

@@ -2,6 +2,7 @@ import React, { useState, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import styled from 'styled-components';
+import { User } from '../User';
 
 const SignupContainer = styled.div`
   max-width: 400px;
@@ -99,6 +100,7 @@ const SignupPage: React.FC = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const user = new User(email, password);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [formError, setFormError] = useState('');
   const { signup, error, isLoading } = useAuth();
@@ -107,27 +109,39 @@ const SignupPage: React.FC = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     
-    // Simple validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+    // Implementing User.js
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
       setFormError('Please fill in all fields');
       return;
     }
 
-    if (!emailRegex.test(email)) {
-      setFormError('Please enter a valid email address');
+    if (!(user.checkEmail_Length(email))) {
+      setFormError('Invalid email format');
+      return;
+    }
+
+    if (!(user.checkEmail_ValidCharacters(email))) {
+      setFormError('Invalid email format');
+      return;
+    }
+
+    if (!(user.checkEmail_Format(email))) {
+      setFormError('Invalid email format');
+      return;
+    }
+
+    if (!(user.checkPassword_Length(password))) {
+      setFormError('Password requirements not met');
+      return;
+    }
+
+    if (!(user.checkPassword_ValidCharacters(password))) {
+      setFormError('Password requirements not met');
       return;
     }
     
     if (password !== confirmPassword) {
       setFormError('Passwords do not match');
-      return;
-    }
-    
-    // Password strength validation
-    if (password.length < 6) {
-      setFormError('Password must be at least 6 characters long');
       return;
     }
     
