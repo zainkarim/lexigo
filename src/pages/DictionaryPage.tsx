@@ -5,6 +5,7 @@ import { FaSearch as RawFaSearch, FaVolumeUp as RawFaVolumeUp, FaStar as RawFaSt
 const FaSearch = RawFaSearch as unknown as React.FC;
 const FaVolumeUp = RawFaVolumeUp as unknown as React.FC;
 const FaStar = RawFaStar as unknown as React.FC;
+import WordClass from '../Word';
 
 import { useAuth } from '../hooks/useAuth';
 
@@ -236,6 +237,20 @@ const DictionaryPage: React.FC = () => {
 
     setLoading(true);
     setError(null);
+
+    const lengthError = WordClass.checkWord_Length(searchTerm);
+    if (lengthError !== "Word is valid") {
+      setError("Word must be between 1 and 50 characters");
+      setLoading(false);
+      return;
+    }
+
+    const specialCharError = WordClass.checkSpecialCharacters(searchTerm);
+    if (specialCharError) {
+      setError("Invalid characters");
+      setLoading(false);
+      return;
+    }
 
     try {
       const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${term}`);
