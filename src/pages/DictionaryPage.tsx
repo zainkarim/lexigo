@@ -38,6 +38,7 @@ const PageTitle = styled.h1`
 const SearchContainer = styled.div`
   position: relative;
   margin-bottom: 2rem;
+  width: 100%;
 `;
 
 const SearchInput = styled.input`
@@ -63,6 +64,11 @@ const SearchIcon = styled.div`
   transform: translateY(-50%);
   color: #6c757d;
   font-size: 1.25rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  margin-top: -0.45rem;
 `;
 
 const RecentSearches = styled.div`
@@ -331,7 +337,7 @@ const DictionaryPage: React.FC = () => {
       <PageTitle>Dictionary</PageTitle>
       
       <SearchContainer>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{ position: 'relative', width: '100%' }}>
           <SearchIcon>
             <FaSearch />
           </SearchIcon>
