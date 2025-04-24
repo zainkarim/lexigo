@@ -1,6 +1,6 @@
 # Lexigo
 
-Lexigo is a gamified dictionary web app that helps users look up and learn new words. Designed to be both functional and educational, Lexigo provides tools such as flashcards and quizzes to reinforce vocabulary learning. Users can log in, search for word definitions, and save their favorite words for later review.
+📖 Lexigo is a gamified dictionary web app that helps users look up and learn new words. Designed to be both functional and educational, Lexigo provides tools such as flashcards and quizzes to reinforce vocabulary learning. Users can log in, search for word definitions, and save their favorite words for later review.
 
 ## 🌐 Live Demo
 
