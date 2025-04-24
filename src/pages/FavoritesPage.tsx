@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useEffect } from 'react';
+import { getFavorites, removeFavorite } from '../firestoreFavorites';
 
 import { FaStar as RawFaStar, FaVolumeUp as RawFaVolumeUp, FaSearch as RawFaSearch, FaSort as RawFaSort, FaSortAlphaDown as RawFaSortAlphaDown, FaSortAlphaUp as RawFaSortAlphaUp } from 'react-icons/fa';
 const FaStar = RawFaStar as unknown as React.FC;
@@ -262,13 +264,23 @@ const formatDate = (dateString: string): string => {
 
 const FavoritesPage: React.FC = () => {
   const { user } = useAuth();
-  const [favoriteWords, setFavoriteWords] = useState<FavoriteWord[]>(mockFavoriteWords);
+  const [favoriteWords, setFavoriteWords] = useState<FavoriteWord[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'alphabetical' | 'dateAdded' | 'lastViewed'>('dateAdded');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
   const [currentPage, setCurrentPage] = useState(1);
   const wordsPerPage = 5;
   
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      if (user) {
+        const favorites = await getFavorites(user.id);
+        setFavoriteWords(favorites);
+      }
+    };
+    fetchFavorites();
+  }, [user]);
+
   // Filter words based on search term
   const filteredWords = favoriteWords.filter(word => 
     word.word.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -321,8 +333,11 @@ const FavoritesPage: React.FC = () => {
   };
   
   // Handle removing from favorites
-  const handleRemoveFavorite = (id: string) => {
-    setFavoriteWords(favoriteWords.filter(word => word.id !== id));
+  const handleRemoveFavorite = async (id: string) => {
+    if (user) {
+      await removeFavorite(user.id, id);
+      setFavoriteWords(prev => prev.filter(word => word.id !== id));
+    }
   };
   
   // Handle playing pronunciation

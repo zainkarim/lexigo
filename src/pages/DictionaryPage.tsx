@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaSearch as RawFaSearch, FaVolumeUp as RawFaVolumeUp, FaStar as RawFaStar } from 'react-icons/fa';
+import { addFavorite, removeFavorite } from '../firestoreFavorites';
 
 const FaSearch = RawFaSearch as unknown as React.FC;
 const FaVolumeUp = RawFaVolumeUp as unknown as React.FC;
@@ -299,8 +300,21 @@ const DictionaryPage: React.FC = () => {
     handleSearch(term);
   };
   
-  const toggleFavorite = () => {
-    if (user) {
+  const toggleFavorite = async () => {
+    if (user && searchResult) {
+      const wordId = searchResult.word.toLowerCase();
+      const wordData = {
+        word: searchResult.word,
+        partOfSpeech: searchResult.partOfSpeech,
+        definition: searchResult.definitions[0].definition, // or merge all defs
+      };
+  
+      if (isFavorite) {
+        await removeFavorite(user.id, wordId);
+      } else {
+        await addFavorite(user.id, wordData);
+      }
+  
       setIsFavorite(!isFavorite);
     }
   };
