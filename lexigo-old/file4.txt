@@ -1,7 +1,0 @@
-This is the fourth sample file.
-It contains more example text for reading.
-Adding line 1
-Adding line 2
-Adding line 3
-
-End of file 4.
