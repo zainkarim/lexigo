@@ -1,0 +1,4 @@
+Welcome to the second sample file.
+This is another example of a text file.
+End of file 2.
+

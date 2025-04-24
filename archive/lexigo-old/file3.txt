@@ -1,0 +1,5 @@
+The third file contains some unique content.
+It is the last file being read.
+This file is now edited. It shouldn't be the last file being read.
+End of file 3.
+
