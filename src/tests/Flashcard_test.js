@@ -63,7 +63,7 @@ describe('Flashcard System', ()=>{
         const result = Flashcard.flip(
             false
         );
-        expect(result).toBe("Flashcard is not flipped!");
+        expect(result).toBe("Click on the card to flip it. Use the buttons below to navigate.");
     });
     test('TC7: Reset Functionality', () => {
         const result = Flashcard.reset(

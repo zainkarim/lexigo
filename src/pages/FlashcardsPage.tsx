@@ -332,7 +332,9 @@ const FlashcardsPage: React.FC = () => {
       {flashcards.length > 0 ? (
         <>
           <FlashcardInstructions>
-            Click on the card to flip it. Use the buttons below to navigate.
+            {!isFlipped ? <div> Click on the card to flip it. Use the buttons below to navigate. </div> :
+                          <div> Flashcard is flipped! </div> }
+            
           </FlashcardInstructions>
           
           <FlashcardWrapper>
