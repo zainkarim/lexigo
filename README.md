@@ -1,56 +1,57 @@
 # Lexigo
 
-Lexigo is a mobile dictionary app with a gamified learning experience. The app allows users to look up words, save favorites, use flashcards, take quizzes, and track their vocabulary growth.
+Lexigo is a gamified dictionary web app that helps users look up and learn new words. Designed to be both functional and educational, Lexigo provides tools such as flashcards and quizzes to reinforce vocabulary learning. Users can log in, search for word definitions, and save their favorite words for later review.
 
-## Installation and Setup
+## 🌐 Live Demo
 
-rm -rf node_modules package-lock.json
+Access the deployed app here:  
+👉 [https://lexigo-61867.web.app](https://lexigo-61867.web.app)
 
-npm install --legacy-peer-deps
+## 🚀 Features
 
-if you got the ajv error like me, run this: npm install ajv@8.12.0 ajv-keywords@5.1.0 --legacy-peer-deps
+- 🔍 **Dictionary Search** – Instantly look up definitions, parts of speech, and pronunciation.
+- ⭐ **Favorites List** – Save words you want to revisit later.
+- 🧠 **Flashcards & Quizzes** – Practice and test your vocabulary knowledge.
+- 🔐 **User Authentication** – Secure login with Firebase Authentication.
 
+## 🛠️ Tech Stack
 
+- **Frontend**: React Native (Web)
+- **Backend/Storage**: Firebase (Authentication & Firestore)
+- **Deployment**: Firebase Hosting
+- **Package Manager**: npm
+
+## 📦 Getting Started
+
+Clone the repo and install dependencies:
+
+```bash
+git clone https://github.com/zainkarim/lexigo.git
+cd lexigo
+npm install
 npm start
+```
 
+The app should open on `http://localhost:3000/` in your browser.
 
-## Login Credentials:
+## 🚚 Deployment
+Lexigo is deployed using Firebase Hosting. To deploy a new version:
 
-- Username: `test`
-- Password: `test`
+```bash
+npm run build
+firebase deploy
+```
 
-## Features
+Ensure you have the Firebase CLI installed and are logged in to your Firebase account.
 
-- Dictionary lookup
-- Word of the Day
-- Favorites collection
-- Flashcards for practice
-- Quizzes to test knowledge
-- User profile with progress tracking
+## 📁 Repository
 
-## Troubleshooting
+Source code: https://github.com/zainkarim/lexigo
 
-If you encounter dependency issues:
+## 📄 License
 
-1. **"Cannot find module 'ajv/dist/compile/codegen'" error**:
+This project is licensed under the MIT License.
 
-   npm install ajv@8.12.0 ajv-keywords@5.1.0 --legacy-peer-deps
+---
 
-
-2. **TypeScript version conflicts**: React-scripts 5 works best with TypeScript 4.9.5
-
-   npm install typescript@4.9.5 --legacy-peer-deps
-
-
-3. **"digital envelope routines::unsupported" error**: This is a Node.js 17+ issue
-
-   # For Mac/Linux
-   export NODE_OPTIONS=--openssl-legacy-provider
-   
-   # For Windows
-   set NODE_OPTIONS=--openssl-legacy-provider
-
-
-4. **Clearing npm cache**: Sometimes a fresh cache helps resolve issues
-
-   npm cache clean --force
+Made with 💡 by the Lexigo Team
