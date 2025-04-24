@@ -251,6 +251,8 @@ const FlashcardsPage: React.FC = () => {
   const [currentDeck, setCurrentDeck] = useState('all');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isReset, setResetCards] = useState(false);
+  const [isShuffled, setisShuffled] = useState(false);
   
   // Get current flashcard
   const currentFlashcard = flashcards[currentIndex];
@@ -282,6 +284,12 @@ const FlashcardsPage: React.FC = () => {
     setFlashcards(shuffled);
     setCurrentIndex(0);
     setIsFlipped(false);
+    setisShuffled(true);
+
+    // Hide the reset message after 2 seconds
+    setTimeout(() => {
+      setisShuffled(false);
+    }, 2000);
   };
   
   // Reset cards
@@ -289,6 +297,12 @@ const FlashcardsPage: React.FC = () => {
     setFlashcards(mockFlashcards);
     setCurrentIndex(0);
     setIsFlipped(false);
+    setResetCards(true);
+
+    // Hide the reset message after 2 seconds
+    setTimeout(() => {
+      setResetCards(false);
+    }, 2000);
   };
   
   // Toggle favorite for current card
@@ -334,6 +348,8 @@ const FlashcardsPage: React.FC = () => {
           <FlashcardInstructions>
             {!isFlipped ? <div> Click on the card to flip it. Use the buttons below to navigate. </div> :
                           <div> Flashcard is flipped! </div> }
+            {isReset && <div>Flashcards are successfully reset!</div>}
+            {isShuffled && <div>Flashcards are shuffled!</div>}
             
           </FlashcardInstructions>
           

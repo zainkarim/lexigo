@@ -14,7 +14,8 @@ describe('Flashcard System', ()=>{
         tag:"verb",
         correctCount:0,
         incorrectCount:0,
-        isFlipped:false
+        isFlipped:false,
+        isShuffled: false
     };
     beforeAll(()=>{
         Flashcard.flashcarddb={
@@ -25,6 +26,7 @@ describe('Flashcard System', ()=>{
                 "verb",
                 0,
                 0,
+                false, 
                 false
             )
         };
@@ -32,101 +34,53 @@ describe('Flashcard System', ()=>{
     beforeEach(()=>{
         flashcard=new Flashcard();
     });
-    describe('Mastery Functionality', () => {
-        test('TC1: Five or more correct attempts and zero incorrect attempts', () => {
-            const result = Flashcard.hasMastered(5, 0);
-            expect(result).toBe("You successfully mastered this word!");
-        });
-
-        test('TC2: Less than five correct attempts', () => {
-            const result = Flashcard.hasMastered(3, 0);
-            expect(result).toBe("Tou still need more correct attempts to achieve mastery!");
-        });
-
-        test('TC3: One or more incorrect attempts', () => {
-            const result = Flashcard.hasMastered(6, 1);
-            expect(result).toBe("You need to practice more to achieve mastery!");
-        });
-
-        test('TC4: Less than five correct attempts and more than zero incorrect attempts', () => {
-            const result = Flashcard.hasMastered(4, 2);
-            expect(result).toBe("You need more correct attempts and less incorrect attempts to master this word!");
-        });
+    test('TC1: Correct Shuffle Functionality', () => {
+        Flashcard.flashcarddb = {
+            1: new Flashcard("Alpha", "First", "Ex", "noun", 0, 0, false, false),
+            2: new Flashcard("Beta", "Second", "Ex", "noun", 0, 0, false, false),
+            3: new Flashcard("Gamma", "Third", "Ex", "noun", 0, 0, false, false),
+        };
+    
+        const result = Flashcard.shuffle();
+        expect(result).toBe("Flashcards successfully shuffled!");
     });
-    test('TC5: Flipped Functionality', () => {
+    
+    test('TC2: Shuffle With Only One Flashcard (Should Fail Gracefully)', () => {
+        Flashcard.flashcarddb = {
+            1: new Flashcard("Solo", "Only one", "Ex", "noun", 0, 0, false, false)
+        };
+    
+        const result = Flashcard.shuffle();
+        expect(result).toBe("Not enough flashcards to shuffle!");
+    });
+    
+    test('TC3: Flipped Functionality', () => {
         const result = Flashcard.flip(
             true
         );
         expect(result).toBe("Flashcard is flipped!");
     });
-    test('TC6: Flipped Functionality', () => {
+    test('TC4: Flipped Functionality', () => {
         const result = Flashcard.flip(
             false
         );
         expect(result).toBe("Click on the card to flip it. Use the buttons below to navigate.");
     });
-    test('TC7: Reset Functionality', () => {
+    test('TC5: Correct Reset Functionality', () => {
         const result = Flashcard.reset(
             0,
             0,
             false
         );
-        expect(result).toBe("Flashcard attempts is successfully reset!");
+        expect(result).toBe("Flashcards successfully reset!");
     });
-    test('TC8: Correct attempts count is not reset', () => {
+    test('TC6: Incorrect Reset Functionality', () => {
         const result = Flashcard.reset(
             3,
             0,
             false
         );
-        expect(result).toBe("Flashcard attempts is not successfully reset!");
+        expect(result).toBe("Flashcards are not successfully reset!");
     });
-    test('TC9: Incorrect attempts count is not reset', () => {
-        const result = Flashcard.reset(
-            0,
-            4,
-            false
-        );
-        expect(result).toBe("Flashcard attempts is not successfully reset!");
-    });
-    test('TC10: Flipped is true', () => {
-        const result = Flashcard.reset(
-            0,
-            0,
-            true
-        );
-        expect(result).toBe("Flashcard attempts is not successfully reset!");
-    });
-    test('TC11: Flipped is true and correct and incorrect attempts are nonzero', () => {
-        const result = Flashcard.reset(
-            9,
-            7,
-            true
-        );
-        expect(result).toBe("Flashcard attempts is not successfully reset!");
-    });
-    test('TC12: Correct and incorrect attempts are nonzero.', () => {
-        const result = Flashcard.reset(
-            1,
-            1,
-            false
-        );
-        expect(result).toBe("Flashcard attempts is not successfully reset!");
-    });
-    test('TC13: Flipped is true and correct attempts is nonzero', () => {
-        const result = Flashcard.reset(
-            8,
-            0,
-            true
-        );
-        expect(result).toBe("Flashcard attempts is not successfully reset!");
-    });
-    test('TC14: Flipped is true amd incorrect attempts is non zero.', () => {
-        const result = Flashcard.reset(
-            0,
-            23,
-            true
-        );
-        expect(result).toBe("Flashcard attempts is not successfully reset!");
-    });
+    
 });

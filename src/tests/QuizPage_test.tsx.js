@@ -56,8 +56,7 @@ describe('QuizPage - User Quiz Interaction', () => {
     render(<QuizPage />);
 
     // Simulate clicking on a non-existent quiz type via direct handler call
-    const startQuiz = screen.getByText('Vocabulary Basics').closest('button');
-    fireEvent.click(startQuiz!);
+    fireEvent.click(screen.getByText('Vocabulary Basics'));
 
     // Simulate an incorrect state
     expect(screen.getByText(/Question 1 of/i)).toBeInTheDocument();
@@ -68,7 +67,15 @@ describe('QuizPage - User Quiz Interaction', () => {
     fireEvent.click(screen.getByText('Vocabulary Basics'));
 
     for (let i = 0; i < 5; i++) {
-      fireEvent.click(screen.getAllByRole('button').find(btn => btn.textContent?.includes('time') || btn.textContent?.includes('Found'))!);
+      const buttons = screen.getAllByRole('button');
+      const timeOrFoundBtn = buttons.find(btn => btn.textContent?.includes('time') || btn.textContent?.includes('Found'));
+      
+      if (timeOrFoundBtn) {
+        fireEvent.click(timeOrFoundBtn);
+      } else {
+        throw new Error("Button with 'time' or 'Found' text not found");
+      }
+      
       fireEvent.click(screen.getByText('Check Answer'));
       fireEvent.click(screen.getByText(i === 4 ? 'Finish Quiz' : 'Next Question'));
     }
