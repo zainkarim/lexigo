@@ -21,7 +21,7 @@ jest.mock('firebase/firestore', () => ({
 
 describe('Add Favorites', () => {
   const userId = 'wxs190012';
-  const word = { word: 'say', partOfSpeech: 'noun', definition: 'utter words so as to convey information, an opinion, a feeling or intention, or an instruction.' };
+  const word = { word: 'say', partOfSpeech: 'verb', definition: 'utter words so as to convey information, an opinion, a feeling or intention, or an instruction.' };
   const wordId = word.word.toLowerCase();
 
   beforeEach(() => {
@@ -53,7 +53,7 @@ describe('Add Favorites', () => {
         id: 'say',
         data: () => ({
           word: 'Say',
-          partOfSpeech: 'noun',
+          partOfSpeech: 'verb',
           definition: 'utter words so as to convey information, an opinion, a feeling or intention, or an instruction.',
           dateAdded: '2025-04-25T12:00:00.000Z',
           lastViewed: '2025-04-25T12:10:00.000Z',
@@ -71,7 +71,7 @@ describe('Add Favorites', () => {
       {
         id: 'say',
         word: 'Say',
-        partOfSpeech: 'noun',
+        partOfSpeech: 'verb',
         definition: 'utter words so as to convey information, an opinion, a feeling or intention, or an instruction.',
         dateAdded: '2025-04-25T12:00:00.000Z',
         lastViewed: '2025-04-25T12:10:00.000Z',
