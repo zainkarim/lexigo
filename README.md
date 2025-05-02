@@ -35,6 +35,7 @@ npm start
 The app should open on `http://localhost:3000/` in your browser.
 
 ## 🚚 Deployment
+
 Lexigo is deployed using Firebase Hosting. To deploy a new version:
 
 ```bash
@@ -43,6 +44,10 @@ firebase deploy
 ```
 
 Ensure you have the Firebase CLI installed and are logged in to your Firebase account.
+
+## 🗂️ Data Source
+
+Lexigo uses the Free Dictionary API to fetch word definitions, phonetics, parts of speech, and example usage. All dictionary data shown in the app is retrieved from this open-source API.
 
 ## 📁 Repository
 
