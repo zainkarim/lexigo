@@ -81,7 +81,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUser(authenticatedUser);
       localStorage.setItem('user', JSON.stringify(authenticatedUser));
     } catch (err: any) {
-      setError(err.message || 'Invalid email or password');
+      setError('Login failed');
     } finally {
       setIsLoading(false);
     }
